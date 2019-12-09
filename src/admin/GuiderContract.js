@@ -34,7 +34,7 @@ async componentDidMount(){
 }
 
 handleAccepct = async (guider_id,contract_id) =>{
-  const r = window.confirm("Do you really want to reject contract"); 
+  const r = window.confirm("Do you really want to accept contract??"); 
   if(r === true){
     let autheticate = {
       method: "GET",
@@ -58,7 +58,7 @@ handleAccepct = async (guider_id,contract_id) =>{
 }
 
 handleReject = async (contract_id) =>{
-  const r = window.confirm("Do you really want to reject contract"); 
+  const r = window.confirm("Do you really want to reject contract??"); 
   if(r == true){ 
     let autheticate = {
       method: "GET",
@@ -92,9 +92,9 @@ handleDownLoad = async (contract_id) =>{
     let {contract} = this.state;
     let dataAcc = contract.map((data, index) => {
       let gender ;
-      if(data.gender === 0){
+      if(data.gender === 1){
         gender =  'Male';
-      }else if(data.gender === 1){
+      }else if(data.gender === 2){
         gender =  'Female';
       }else{
         gender =  'Other';

@@ -37,8 +37,6 @@ class ChartRevenue extends Component {
 			});
 		  }
 		  
-		  console.log({ x: new Date(2017, 0), y: 2506 });
-		  
 		  this.setState({data:chartData});
 	}
 	render() {

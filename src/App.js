@@ -17,21 +17,8 @@ import PrivateRoute from './layout/PrivateRoute';
 import PublicRoute from './layout/PublicRoute';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      decisionPage:false,
-      JSX: <Template handleClick={(e)=>this.handleClick(e)}/>
-    }
-  }
-
-  handleClick = (event) =>{
-    this.setState({ decisionPage: !this.state.decisionPage });
-    event.preventDefault();
-  };
   
   render() {
-    let {decisionPage,JSX} = this.state;
     return (
       <Router>
         <Switch>

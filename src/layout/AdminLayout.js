@@ -28,32 +28,32 @@ export default class AdminLayout extends Component {
                 <div className="sidebar-heading">Addons</div>
                 <Link className="nav-item" to={'/guiderContract'}>
                   <span className="nav-link triggerA" href="charts.html">
-                    <i className="fas fa-fw fa-chart-area" />
+                    <i class="fas fa-handshake"></i>
                     <span>Manage guider contract</span>
                   </span>
                 </Link>
                 {/* Nav Item - Tables */}
                 <Link className="nav-item" to={'/account'}>
                   <span className="nav-link triggerA" >
-                    <i className="fas fa-fw fa-table" />
+                    <i class="fa fa-user"></i>
                     <span>Manage account</span>
                   </span>
                 </Link>
                 <Link className="nav-item" to={'/cateNLoc'}>
                   <span className="nav-link triggerA" href="tables.html">
-                    <i className="fas fa-fw fa-table" />
+                  <i class="fas fa-align-center"></i>
                     <span>Manage category and location</span>
                   </span>
                 </Link>
                 <Link className="nav-item" to={'/chartRevenue'}>
                   <span className="nav-link triggerA" href="tables.html">
-                    <i className="fas fa-fw fa-table" />
+                  <i class="fa fa-money-bill-alt"></i>
                     <span>Statistic of revenue by month</span>
                   </span>
                 </Link>
                 <Link className="nav-item" to={'/chartTrip'}>
                   <span className="nav-link triggerA" href="tables.html">
-                    <i className="fas fa-fw fa-table" />
+                     <i class="fab fa-contao"></i>
                     <span>Statistic of completed trip by month</span>
                   </span>
                 </Link>
