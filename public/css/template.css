@@ -38,6 +38,10 @@
     position: absolute;
     right:-140px;
 }
+.adminLogin{
+    background-color: #4e73df;
+    height: 1000px;
+}
 /* 
 #wrapper {
     background-color: #4e73df;

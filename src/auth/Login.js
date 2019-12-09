@@ -31,11 +31,13 @@ class Login extends Component {
         const { data } = this.state;
         let isError = false;
         let errors = {};
-        if(data.userName === '' || data.password === '') {
+        if(data.userName === '') {
           isError = true;
-          errors['err'] = 'User name or password is empty!!';
+          errors['err'] = 'Please input username';
+        }else if(data.password === '') {
+          isError = true;
+          errors['err'] = 'Please input password';
         }
-    
     
         this.setState({ isError, errors });
         if(isError) 
@@ -45,19 +47,18 @@ class Login extends Component {
       }
 
     handleSubmit = async (e)=>{
+        e.preventDefault();
+        let {errors} = this.state;
         if(this.isValidate()) {
             return false;
           }
           let {data, user} = this.state;
           if(data.userName === user.userName && data.password === user.password){
-              // this.props.handleClick(e);
               localStorage.setItem('isAuthenticate', true);
-              localStorage.setItem('AuthInfo', JSON.stringify({
-                id: '125452',
-                email: 'sss',
-                name: 'sdg'
-              }));
               window.location.href = "/";
+          }else{
+            errors['err'] = 'Wrong password or username';
+            this.setState({errors});
           }
     }
 
@@ -81,7 +82,7 @@ class Login extends Component {
                           <form className="user">
                             <div className="form-group">
                               <input
-                                type="email"
+                                type="text"
                                 className="form-control form-control-user"
                                 id="exampleInputEmail"
                                 aria-describedby="emailHelp"
@@ -117,7 +118,7 @@ class Login extends Component {
                                 </label>
                               </div>
                             </div>
-                            <button type="submit"
+                            <button
                               className="btn btn-primary btn-user btn-block triggerA"
                               onClick={(e)=>this.handleSubmit(e)}
                             >
