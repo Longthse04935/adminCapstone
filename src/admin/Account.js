@@ -11,8 +11,8 @@ class Account extends Component {
     };
   }
 
-  async componentDidMount() {
-    let { accountFiller, account } = this.state;
+  loadData = async()=>{
+    let { accountFiller } = this.state;
     let autheticate = {
       method: "GET",
       mode: "cors",
@@ -38,6 +38,10 @@ class Account extends Component {
     this.setState({ accountFiller,account:acc });
   }
 
+  async componentDidMount() {
+    this.loadData();
+  }
+
 
   handleFillter = letter => {
     let { account } = this.state;
@@ -49,10 +53,11 @@ class Account extends Component {
       }
     });
     letter === "TRAVELER" ? (hideButton = true) : (hideButton = false);
-    this.setState({ accountFiller, hideButton });
+    this.setState({ accountFiller, hideButton,letter });
   };
 
-  handleActive = async (param,param2)=>{
+  handleActive = async (param,param2,index)=>{
+    let {accountFiller} = this.state;
     let autheticate = {
       method: "GET",
       mode: "cors",
@@ -69,11 +74,18 @@ class Account extends Component {
     if (!response.ok) {
       throw Error(response.status + ": " + response.statusText);
     }
-    const acc = await response.json();
+    if(param2 === "Activate"){
+      accountFiller[index].status = true;
+      console.log(accountFiller[index]);
+    }else{
+     accountFiller[index].status = false;
+     console.log(accountFiller[index]);
+    }
+    this.setState({accountFiller});
   }
 
   render() {
-    let { accountFiller, hideButton } = this.state;
+    let { accountFiller, hideButton,letter } = this.state;
     let dataAcc = accountFiller.map((data, index) => {
       if (data.role === "TRAVELER") {
         return (
@@ -81,7 +93,6 @@ class Account extends Component {
             <td className="sorting_1">{data.userName}</td>
             <td>{data.email}</td>
             <td>{data.role}</td>
-            <td>{data.status ? 'Active':'Deactive'}</td>
           </tr>
         );
       } else {
@@ -92,7 +103,7 @@ class Account extends Component {
             <td>{data.role}</td>
             <td>{data.status ? 'Active':'Deactive'}</td>
             <td>
-              <span className="btn btn-primary btn-icon-split triggerA" onClick={()=>this.handleActive(data.id,"Activate")}>
+              <span className="btn btn-primary btn-icon-split triggerA" onClick={()=>this.handleActive(data.id,"Activate",index)}>
                 <span className="icon text-white-50">
                   <i className="fas fa-flag"></i>
                 </span>
@@ -100,7 +111,7 @@ class Account extends Component {
               </span>
             </td>
             <td>
-              <span className="btn btn-danger btn-icon-split triggerA" onClick={()=>this.handleActive(data.id,"Deactivate")}>
+              <span className="btn btn-danger btn-icon-split triggerA" onClick={()=>this.handleActive(data.id,"Deactivate",index)}>
                 <span className="icon text-white-50">
                   <i className="fas fa-trash"></i>
                 </span>
@@ -193,7 +204,8 @@ class Account extends Component {
                           >
                             Role
                           </th>
-                          <th
+                          {
+                            letter === "GUIDER" ?  <th
                             className="sorting_asc"
                             tabIndex={0}
                             aria-controls="dataTable"
@@ -204,9 +216,10 @@ class Account extends Component {
                             style={{ width: 200 }}
                           >
                             Status
-                          </th>
-                          {/* {hideButton ? (
-                            ""
+                          </th> : null
+                          }
+                          {hideButton ? (
+                            null
                           ) : (
                             <th
                               className="sorting"
@@ -217,11 +230,11 @@ class Account extends Component {
                               aria-label="Office: activate to sort column ascending"
                               style={{ width: 150 }}
                             >
-                              Active
+                              Activate
                             </th>
                           )}
                           {hideButton ? (
-                            ""
+                            null
                           ) : (
                             <th
                               className="sorting"
@@ -232,9 +245,9 @@ class Account extends Component {
                               aria-label="Office: activate to sort column ascending"
                               style={{ width: 150 }}
                             >
-                              Deactive
+                              Deactivate
                             </th>
-                          )} */}
+                          )}
                         </tr>
                       </thead>
                       <tbody>{dataAcc}</tbody>
