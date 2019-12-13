@@ -50,7 +50,18 @@ class CateNLoc extends Component {
     async componentDidMount(){
      this.loadData();
     }
-    
+
+    onImageChange = async (event) => {
+      let {data} = this.state;
+      if (event.target.files && event.target.files[0]) {
+        let reader = new FileReader();
+      reader.onload = (event) => {
+        data['image'] = event.target.result;
+        this.setState({data});
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+    }
 
     handleChange = (e) =>{
       const { data } = this.state;
@@ -59,24 +70,25 @@ class CateNLoc extends Component {
         
         data[name] = value;
         this.setState({ data });
-   
     }
- 
+
 
     handleAdd = async (param) => {
       let {data} = this.state;
+      console.log(data);
       let autheticate = {
         method: "POST",
         mode: "cors",
         credentials: "include",
         headers: {
-          Accept: "application/json"
+          Accept: "application/json",
+          'Content-Type': 'application/json'
         },
         body:JSON.stringify(data)
       };
       if(param === 'category'){
         const response = await fetch(
-          Config.api_url + "category/create?name="+data.category,
+          Config.api_url + "category/create",
           autheticate
         );
       
@@ -109,16 +121,21 @@ class CateNLoc extends Component {
    
     }
 
-  showInput = param => {
+  showInput = (param) => {
     let {categoryInput,locationInput} = this.state;
     if(param === 'category'){
-      categoryInput = <div className="form-group addForm">
-                        <input type="text" className="form-control addForm_Input" id="exampleFormControlInput1" name="category" onChange={this.handleChange} placeholder="Category"/>
-                       
-                        <span className="btn btn-primary btn-icon-split triggerA addForm_Span" onClick={()=>this.handleAdd('category')}>
+      categoryInput = <div className="form-group categoryForm">
+                        {/* <input type="text" className="form-control addForm_Input" id="exampleFormControlInput1" name="category" onChange={this.handleChange} placeholder="Category"/> */}
+                        <div style={{marginBottom:'20px'}}>
+                        <input type="text" className="form-control addForm_Input" placeholder="Category" name="category" onChange={this.handleChange} placeholder="Category"/>
+                        <label htmlFor="file-upload" className="custom-file-upload"> Upload image category
+                        </label>
+                        <input id="file-upload" type="file" name="image" onChange={this.onImageChange}/>
+                        </div>
+                        <span className="btn btn-primary btn-icon-split triggerA" onClick={()=>this.handleAdd('category')}>
                           <span className="text">Add</span>
                         </span>
-                        <span className="btn btn-primary btn-icon-split triggerA closeForm_Span" onClick={()=>this.handleHideAdd('category')}>
+                        <span style={{marginLeft:'5px'}} className="btn btn-primary btn-icon-split triggerA" onClick={()=>this.handleHideAdd('category')}>
                           <span className="text">Close</span>
                         </span>
                       </div>
@@ -140,7 +157,7 @@ class CateNLoc extends Component {
     this.setState({categoryInput,locationInput})
   }
   render() {
-    let {categoryInput,locationInput,categoryData,locationData} = this.state;
+    let {categoryInput,locationInput,categoryData,locationData,image} = this.state;
     let category = categoryData.map((data, index) => (
         <tr role="row" className="odd" key={index}>
         <td className="sorting_1">{data.category} trip</td>

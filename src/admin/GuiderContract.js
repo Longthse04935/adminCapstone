@@ -57,7 +57,7 @@ handleAccepct = async (guider_id,contract_id) =>{
   }
 }
 
-handleReject = async (contract_id) =>{
+handleReject = async (guider_id,contract_id) =>{
   const r = window.confirm("Do you really want to reject contract??"); 
   if(r == true){ 
     let autheticate = {
@@ -69,7 +69,7 @@ handleReject = async (contract_id) =>{
       }
     };
     const response = await fetch(
-      Config.api_url + "Guider/RejectContract?contract_id="+contract_id,
+      Config.api_url + "Guider/RejectContract?guider_id="+guider_id+"contract_id="+contract_id,
       autheticate
     );
   
@@ -120,7 +120,7 @@ handleDownLoad = async (contract_id) =>{
           </span>
         </td>
         <td>
-          <span className="btn btn-danger btn-icon-split triggerA" onClick={()=>{this.handleReject(data.contract_id)}}>
+          <span className="btn btn-danger btn-icon-split triggerA" onClick={()=>{this.handleReject(data.guider_id,data.contract_id)}}>
             <span className="icon text-white-50">
               <i className="fas fa-trash"></i>
             </span>
