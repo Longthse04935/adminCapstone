@@ -176,7 +176,7 @@ class CateNLoc extends Component {
         <div className="card shadow mb-4">
           <div className="card-header py-3">
             <h6 className="m-0 font-weight-bold text-primary">
-              Manage Example
+              Manage Category And Location
             </h6>
           </div>
           <div className="catNloc">

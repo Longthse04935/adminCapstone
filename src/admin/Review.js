@@ -60,20 +60,20 @@ class Review extends Component {
       <td className="sorting_1">{data.review}</td>
       { data.visible ?
         <td>
-          <span className="btn btn-primary btn-icon-split triggerA" onClick={()=>{this.handleShowHide(data.trip_id,index)}}>
-            <span className="icon text-white-50">
-              <i className="fas fa-flag"></i>
-            </span>
-            <span className="text">Show</span>
-          </span>
-        </td>
-        : 
-        <td>
           <span className="btn btn-danger btn-icon-split triggerA" onClick={()=>{this.handleShowHide(data.trip_id,index)}}>
             <span className="icon text-white-50">
               <i className="fas fa-trash"></i>
             </span>
             <span className="text">Hide</span>
+          </span>
+        </td>
+        : 
+         <td>
+          <span className="btn btn-primary btn-icon-split triggerA" onClick={()=>{this.handleShowHide(data.trip_id,index)}}>
+            <span className="icon text-white-50">
+              <i className="fas fa-flag"></i>
+            </span>
+            <span className="text">Show</span>
           </span>
         </td>
       }

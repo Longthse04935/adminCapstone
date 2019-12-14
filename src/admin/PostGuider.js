@@ -64,21 +64,21 @@ class PostGuider extends Component {
       <td>{data.reasons}</td>
       <td>{JSON.stringify(data.authorized).toUpperCase()}</td>
       { data.authorized ?
+	  <td>
+          <span className="btn btn-danger btn-icon-split triggerA" onClick={()=>{this.handleAccepct(data.post_id,index)}}>
+            <span className="icon text-white-50">
+              <i className="fas fa-trash"></i>
+            </span>
+            <span className="text">Deactivate</span>
+          </span>
+        </td>
+        : 
         <td>
           <span className="btn btn-primary btn-icon-split triggerA" onClick={()=>{this.handleAccepct(data.post_id,index)}}>
             <span className="icon text-white-50">
               <i className="fas fa-flag"></i>
             </span>
-            <span className="text">Authorize</span>
-          </span>
-        </td>
-        : 
-        <td>
-          <span className="btn btn-danger btn-icon-split triggerA" onClick={()=>{this.handleAccepct(data.post_id,index)}}>
-            <span className="icon text-white-50">
-              <i className="fas fa-trash"></i>
-            </span>
-            <span className="text">Unauthorize</span>
+            <span className="text">Activate</span>
           </span>
         </td>
       }
