@@ -12,6 +12,6 @@
     margin-left: 1em;
 }
 
-#dataTable_length,#dataTable_filter,#dataTable_info,#dataTable_paginate,.dataTables_empty,.navbar-search{
+#dataTable_length,#dataTable_filter,#dataTable_info,#dataTable_paginate{
     display: none !important;
 }
