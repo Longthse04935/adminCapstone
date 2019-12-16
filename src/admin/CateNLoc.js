@@ -48,7 +48,7 @@ class CateNLoc extends Component {
     }
 
     async componentDidMount(){
-     this.loadData();
+      this.loadData();
     }
 
     onImageChange = async (event) => {

@@ -12,6 +12,9 @@
     margin-left: 1em;
 }
 
-#dataTable_length,#dataTable_filter,#dataTable_info,#dataTable_paginate{
+#dataTable_length,#dataTable_filter,#dataTable_info,#dataTable_paginate,.dataTables_empty,#searchOutAccount{
+    display: none !important;
+}
+.hide-search {
     display: none !important;
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Config from "../Config";
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 class Review extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +11,6 @@ class Review extends Component {
   }
 
   async componentDidMount() {
-    
     let autheticate = {
       method: "GET",
       mode: "cors",

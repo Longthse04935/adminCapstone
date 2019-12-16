@@ -29,7 +29,6 @@ class PostGuider extends Component {
     this.setState({data});
   }
   async componentDidMount() {
-    
    this.loadData();
   };
 

@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import $ from 'jquery';
 export default class AdminLayout extends Component {
+  constructor(props){
+    super(props);
+  }
+
     render() {
+      // this.showSearchBar;
         return  (
             <div id="wrapper">
               {/* Sidebar */}
@@ -26,7 +32,7 @@ export default class AdminLayout extends Component {
                 <hr className="sidebar-divider" />
                 {/* Heading */}
                 <div className="sidebar-heading">Addons</div>
-                <Link className="nav-item" to={'/guiderContract'}>
+                <Link className="nav-item" to={'/guider-contract'}>
                   <span className="nav-link triggerA" href="charts.html">
                     <i className="fas fa-handshake"></i>
                     <span>Manage guider contract</span>
@@ -39,19 +45,19 @@ export default class AdminLayout extends Component {
                     <span>Manage account</span>
                   </span>
                 </Link>
-                <Link className="nav-item" to={'/cateNLoc'}>
+                <Link className="nav-item" to={'/cate-and-loc'}>
                   <span className="nav-link triggerA" href="tables.html">
                   <i className="fas fa-align-center"></i>
                     <span>Manage category and location</span>
                   </span>
                 </Link>
-                <Link className="nav-item" to={'/chartRevenue'}>
+                <Link className="nav-item" to={'/chart/revenue'}>
                   <span className="nav-link triggerA" href="tables.html">
                   <i className="fa fa-money-bill-alt"></i>
                     <span>Statistic of revenue by month</span>
                   </span>
                 </Link>
-                <Link className="nav-item" to={'/chartTrip'}>
+                <Link className="nav-item" to={'/chart/trip'}>
                   <span className="nav-link triggerA" href="tables.html">
                      <i className="fab fa-contao"></i>
                     <span>Statistic of completed trip by month</span>
@@ -75,7 +81,7 @@ export default class AdminLayout extends Component {
                       <i className="fa fa-bars" />
                     </button>
                     {/* Topbar Search */}
-                    <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" id="searchOutAccount">
                       <div className="input-group">
                         <input
                           type="text"

@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Account from './Account';
-import ChartRevenue from './ChartRevenue';
-import ChartTrip from './ChartTrips';
-import CatNLocation from './CateNLoc';
-import GuiderContract from './GuiderContract';
-import PostGuider from './PostGuider';
-import Review from './Review';
-import Login from '../auth/Login';
 
 class template extends Component {
   constructor(props) {

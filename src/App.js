@@ -22,12 +22,12 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <PrivateRoute path='/guiderContract' layout={AdminLayout} component={GuiderContract} exact />
+          <PrivateRoute path='/guider-contract' layout={AdminLayout} component={GuiderContract} exact />
           <PrivateRoute path='/' layout={AdminLayout} component={GuiderContract} exact />
           <PrivateRoute path='/account' layout={AdminLayout} component={Account} exact />
-          <PrivateRoute path='/chartRevenue' layout={AdminLayout} component={ChartRevenue} exact />
-          <PrivateRoute path='/chartTrip' layout={AdminLayout} component={ChartTrip} exact />
-          <PrivateRoute path='/cateNLoc' layout={AdminLayout} component={CatNLocation} exact />
+          <PrivateRoute path='/chart/revenue' layout={AdminLayout} component={ChartRevenue} exact />
+          <PrivateRoute path='/chart/trip' layout={AdminLayout} component={ChartTrip} exact />
+          <PrivateRoute path='/cate-and-loc' layout={AdminLayout} component={CatNLocation} exact />
           <PrivateRoute path='/guider/:guider_id' layout={AdminLayout} component={PostGuider} exact />
           <PrivateRoute path='/review/:post_id' layout={AdminLayout} component={Review} exact />
 

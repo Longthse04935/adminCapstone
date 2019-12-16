@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import Config from "../Config";
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 class Account extends Component {
   constructor(props) {
     super(props);
     this.state = {
       hideButton: true,
       account: [],
-      accountFiller: []
+      accountFiller: [],
+      input:''
     };
   }
 
@@ -53,8 +55,27 @@ class Account extends Component {
       }
     });
     letter === "TRAVELER" ? (hideButton = true) : (hideButton = false);
-    this.setState({ accountFiller, hideButton,letter });
+    this.setState({ accountFiller, hideButton,letter,input:''});
   };
+  
+  handleChange = async (e) =>{
+    let value =  e.target.value;
+    let autheticate = {
+      method: "GET",
+      mode: "cors",
+      credentials: "include",
+      headers: {
+        Accept: "application/json"
+      }
+    };
+    const response = await fetch(
+      Config.api_url + "account/findAccountByNameAdmin?name="+value,
+      autheticate
+    );
+
+    let data = await response.json();
+    this.setState({accountFiller:data,letter:'GUIDER',hideButton:false,input:value});
+  }
 
   handleActive = async (param,param2,index)=>{
     let {accountFiller} = this.state;
@@ -127,9 +148,30 @@ class Account extends Component {
         {/* DataTales Example */}
         <div className="card shadow mb-4">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">
+            <h6 className="m-0 font-weight-bold text-primary" style={{display:'inline'}}>
               Manage Account
             </h6>
+            <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style={{
+                border:'1px #eaeaea solid',
+                borderRadius: '6px'
+            }}>
+                      <div className="input-group">
+                        <input
+                          type="text"
+                          className="form-control bg-light border-0 small"
+                          placeholder="Search for guider..."
+                          aria-label="Search"
+                          aria-describedby="basic-addon2"
+                          value={this.state.input}
+                          onChange={this.handleChange}
+                        />
+                        <div className="input-group-append">
+                          <button className="btn btn-primary" type="button">
+                            <i className="fas fa-search fa-sm" />
+                          </button>
+                        </div>
+                      </div>
+                    </form>
           </div>
           <div className="card-body">
             <div className="table-responsive">
