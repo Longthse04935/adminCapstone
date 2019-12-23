@@ -171,7 +171,7 @@ handleDownLoad = async (contract_id) =>{
         <td>{data.hometown}</td>
         <td>{data.address}</td>
         <td>{data.identity_card_number}</td>
-        <td>{data.card_issued_date}</td>
+        <td>{data.card_issued_date.split(' ')[0]}</td>
         <td>{data.card_issued_province}</td>
         <td className="triggerA" style={{color:'#e71575'}} onClick={()=>{this.handleDownLoad(data.contract_id)}}>Download File</td>
         </tr>
