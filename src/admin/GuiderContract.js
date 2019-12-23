@@ -6,7 +6,8 @@ class GuiderContract extends Component {
     super(props);
     this.state = {
         contract:[
-        ]
+        ],
+        type:'Pending'
     };
   }
 handleLoadData = async () =>{
@@ -32,6 +33,11 @@ handleLoadData = async () =>{
 
 async componentDidMount(){
   this.handleLoadData();
+}
+
+handleFillter = (type)=>{
+  console.log(type);
+  this.setState({type});
 }
 
 handleAccepct = async (guider_id,contract_id) =>{
@@ -90,7 +96,7 @@ handleDownLoad = async (contract_id) =>{
 }
 
   render() {
-    let {contract} = this.state;
+    let {contract,type} = this.state;
     let dataAcc = contract.map((data, index) => {
       let gender ;
       if(data.gender === 1){
@@ -101,6 +107,7 @@ handleDownLoad = async (contract_id) =>{
         gender =  'Other';
       }
       return (
+        type === 'Pending' ?
         <tr role="row" className="odd" key={index}>
         <td className="sorting_1">{data.name}</td>
         <td>{data.nationality}</td>
@@ -129,6 +136,19 @@ handleDownLoad = async (contract_id) =>{
           </span>
         </td>
       </tr>
+      :
+      <tr role="row" className="odd" key={index}>
+        <td className="sorting_1">{data.name}</td>
+        <td>{data.nationality}</td>
+        <td>{data.date_of_birth.replace("00:00","")}</td>
+        <td>{gender}</td>
+        <td>{data.hometown}</td>
+        <td>{data.address}</td>
+        <td>{data.identity_card_number}</td>
+        <td>{data.card_issued_date}</td>
+        <td>{data.card_issued_province}</td>
+        <td className="triggerA" style={{color:'#e71575'}} onClick={()=>{this.handleDownLoad(data.contract_id)}}>Download File</td>
+        </tr>
       )
     });
     return (
@@ -146,6 +166,25 @@ handleDownLoad = async (contract_id) =>{
                 id="dataTable_wrapper"
                 className="dataTables_wrapper dt-bootstrap4"
               >
+               <div
+                  className="row"
+                  style={{ textAlign: "center", marginBottom: "20px" }}
+                >
+                  <div className="role">
+                    <span
+                      onClick={() => this.handleFillter("Pending")}
+                      className="btn btn-primary btn-icon-split traveler-button"
+                    >
+                      <span className="text">Pending</span>
+                    </span>
+                    <span
+                      onClick={() => this.handleFillter("Active")}
+                      className="btn btn-primary btn-icon-split guider-button"
+                    >
+                      <span className="text">Active</span>
+                    </span>
+                  </div>
+                </div>
                 <div className="row">
                   <div className="col-sm-12">
                     <table
@@ -242,18 +281,8 @@ handleDownLoad = async (contract_id) =>{
                           >
                             Identity card number
                           </th>
-                          <th
-                            className="sorting_asc"
-                            tabIndex={0}
-                            aria-controls="dataTable"
-                            rowSpan={1}
-                            colSpan={1}
-                            aria-sort="ascending"
-                            aria-label="Name: activate to sort column descending"
-                            style={{ width: 200 }}
-                          >
-                            Card issued date
-                          </th>
+                          
+
                           <th
                             className="sorting_asc"
                             tabIndex={0}
@@ -278,7 +307,9 @@ handleDownLoad = async (contract_id) =>{
                           >
                             Download file PDF
                           </th>
-                          <th
+                          {
+                            type === 'Pending' ?
+                            <th
                             className="sorting"
                             tabIndex={0}
                             aria-controls="dataTable"
@@ -288,8 +319,11 @@ handleDownLoad = async (contract_id) =>{
                             style={{ width: 150 }}
                           >
                             Accept
-                          </th>
-                          <th
+                          </th> : null
+                          }
+                          {
+                            type === 'Pending' ?
+                            <th
                             className="sorting"
                             tabIndex={0}
                             aria-controls="dataTable"
@@ -299,7 +333,8 @@ handleDownLoad = async (contract_id) =>{
                             style={{ width: 150 }}
                           >
                             Reject
-                          </th>
+                          </th>:null
+                          }
                         </tr>
                       </thead>
                       <tbody>
