@@ -10,6 +10,7 @@ class GuiderContract extends Component {
         type:'Pending'
     };
   }
+
 handleLoadData = async () =>{
   let autheticate = {
     method: "GET",
@@ -31,12 +32,37 @@ handleLoadData = async () =>{
   this.setState({contract});
 }
 
+handleActiveContract = async ()=>{
+  let autheticate = {
+    method: "GET",
+    mode: "cors",
+    credentials: "include",
+    headers: {
+      Accept: "application/json"
+    }
+  };
+  const response = await fetch(
+    Config.api_url + "Guider/getActiveContract",
+    autheticate
+  );
+
+  if (!response.ok) {
+    throw Error(response.status + ": " + response.statusText);
+  }
+  const contract = await response.json();
+  this.setState({contract});
+}
+
 async componentDidMount(){
   this.handleLoadData();
 }
 
 handleFillter = (type)=>{
-  console.log(type);
+  if(type === 'Pending'){
+    this.handleLoadData();
+  }else{
+    this.handleActiveContract();
+  }
   this.setState({type});
 }
 
@@ -282,7 +308,18 @@ handleDownLoad = async (contract_id) =>{
                             Identity card number
                           </th>
                           
-
+                          <th
+                            className="sorting_asc"
+                            tabIndex={0}
+                            aria-controls="dataTable"
+                            rowSpan={1}
+                            colSpan={1}
+                            aria-sort="ascending"
+                            aria-label="Name: activate to sort column descending"
+                            style={{ width: 200 }}
+                          >
+                          Date of issue
+                          </th>
                           <th
                             className="sorting_asc"
                             tabIndex={0}
