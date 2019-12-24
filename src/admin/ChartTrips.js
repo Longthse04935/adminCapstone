@@ -49,7 +49,7 @@ class ChartTrips extends Component {
 			  for(let i = 0; i < response.length; i++) {
 				let row = response[i];
 				chartData.push({
-					x: new Date(row.year, row.month), y: row.revenue
+					x: new Date(row.year, row.month), y: row.trips
 				});
 			  }
 			this.setState({data:chartData});
