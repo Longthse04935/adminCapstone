@@ -102,7 +102,7 @@ handleReject = async (guider_id,contract_id) =>{
       }
     };
     const response = await fetch(
-      Config.api_url + "Guider/RejectContract?guider_id="+guider_id+"contract_id="+contract_id,
+      Config.api_url + "Guider/RejectContract?guider_id="+guider_id+"&contract_id="+contract_id,
       autheticate
     );
   
