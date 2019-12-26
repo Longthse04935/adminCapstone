@@ -114,12 +114,12 @@ handleReject = async (guider_id,contract_id) =>{
    }
 }
 
-handleDownLoad = async (contract_id) =>{
+// handleDownLoad = async (contract_id) =>{
 
-  let api = Config.api_url + "Guider/DownloadDocument?contract_id="+contract_id;
-  window.open(api, 'blank');
+//   let api = Config.api_url + "Guider/DownloadDocument?contract_id="+contract_id;
+//   window.open(api, 'blank');
 
-}
+// }
 
   render() {
     let {contract,type} = this.state;
@@ -144,7 +144,7 @@ handleDownLoad = async (contract_id) =>{
         <td>{data.identity_card_number}</td>
         <td>{data.card_issued_date}</td>
         <td>{data.card_issued_province}</td>
-        <td className="triggerA" style={{color:'#e71575'}} onClick={()=>{this.handleDownLoad(data.contract_id)}}>Download File</td>
+        <td className="triggerA" style={{color:'#e71575'}} onClick={()=>{window.open(data.file_link, 'blank')}}>Download File</td>
         <td>
           <span className="btn btn-primary btn-icon-split triggerA" onClick={()=>{this.handleAccepct(data.guider_id,data.contract_id)}}>
             <span className="icon text-white-50">
@@ -173,7 +173,7 @@ handleDownLoad = async (contract_id) =>{
         <td>{data.identity_card_number}</td>
         <td>{data.card_issued_date.split(' ')[0]}</td>
         <td>{data.card_issued_province}</td>
-        <td className="triggerA" style={{color:'#e71575'}} onClick={()=>{this.handleDownLoad(data.contract_id)}}>Download File</td>
+        <td className="triggerA" style={{color:'#e71575'}} onClick={()=>{window.open(data.file_link, 'blank')}}>Download File</td>
         </tr>
       )
     });
